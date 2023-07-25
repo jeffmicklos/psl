@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PSL Countdown</title>
+    <!-- Add your CSS styles here -->
+</head>
+<body>
+    <div id="countdown">
+        <h1>Time Until PSL</h1>
+        <div id="timer">
+            <span id="days">00</span> days
+            <span id="hours">00</span> hours
+            <span id="minutes">00</span> minutes
+            <span id="seconds">00</span> seconds
+        </div>
+    </div>
+
+    <script>
+        // Set the date and time for the countdown
+        var targetDate = new Date("2023-08-30T00:00:00Z"); // Replace with your desired date and time in the format "YYYY-MM-DDTHH:mm:ssZ"
+
+        // Update the countdown every second
+        var countdownInterval = setInterval(updateCountdown, 1000);
+
+        function updateCountdown() {
+            var now = new Date().getTime();
+            var timeLeft = targetDate - now;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("timer").innerHTML = "Countdown expired!";
+                return;
+            }
+
+            // Calculate the remaining time
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Display the remaining time in the HTML elements
+            document.getElementById("days").innerHTML = formatTime(days);
+            document.getElementById("hours").innerHTML = formatTime(hours);
+            document.getElementById("minutes").innerHTML = formatTime(minutes);
+            document.getElementById("seconds").innerHTML = formatTime(seconds);
+        }
+
+        function formatTime(time) {
+            return time < 10 ? "0" + time : time;
+        }
+    </script>
+</body>
+</html>
