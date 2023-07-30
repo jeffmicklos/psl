@@ -68,9 +68,6 @@
             return time < 10 ? "0" + time : time;
         }
 
-  
-
-        // Function to add meta tags for share embeds
         function addShareEmbedMetaTags() {
           const { days, hours, minutes, seconds } = getTimeRemaining();
           const images = [
@@ -108,7 +105,7 @@
           });
         }
     
-        // Call the function to add meta tags for share embeds
+        updateCountdown()
         addShareEmbedMetaTags();
     </script>
 </body>
