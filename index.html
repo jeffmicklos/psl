@@ -22,6 +22,19 @@
         // Update the countdown every second
         var countdownInterval = setInterval(updateCountdown, 1000);
 
+        function getTimeRemaining() {
+            var now = new Date().getTime();
+            var timeLeft = targetDate - now;
+
+            // Calculate the remaining time
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            return { days, hours, minutes, seconds };
+        }
+
         function updateCountdown() {
             var now = new Date().getTime();
             var timeLeft = targetDate - now;
@@ -32,12 +45,8 @@
                 return;
             }
 
-            // Calculate the remaining time
-            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
+            const { days, hours, minutes, seconds } = getTimeRemaining();
+            
             // Display the remaining time in the HTML elements
             document.getElementById("days").innerHTML = formatTime(days);
             document.getElementById("hours").innerHTML = formatTime(hours);
@@ -48,6 +57,46 @@
         function formatTime(time) {
             return time < 10 ? "0" + time : time;
         }
+
+        // Function to add meta tags for share embeds
+        function addShareEmbedMetaTags() {
+          const { days, hours, minutes, seconds } = getTimeRemaining();
+          const images = [
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690743853/psl/6ad2ee7ea6924204a64a961ac863294dfde9c002.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690743816/psl/download-3.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690743817/psl/download-1.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690743816/psl/download-4.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690743816/psl/download-4.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690743817/psl/download-5.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690743816/psl/f5448e13fcda4f36a9de6402a5b3e0eca9809420.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690743816/psl/c872e24948984a27a0c52627722bc051a9809421.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690744177/psl/01d1429d51304290b1230d152c3585ddf72928e0.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690744177/psl/f3a5d0caa3b94184b28bf14ced15a124f72928e3.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690744177/psl/6aaa4eefb04846848668c64bd3641f88557e6c92.webp',
+            'https://res.cloudinary.com/listentoapril/image/upload/v1690744177/psl/18aa3ed5197e4493a2cdc13e09a01850557e6c91.webp'
+          ]
+
+          const image = images[Math.floor(Math.random() * images.length)];
+          const imageSrc = `https://res.cloudinary.com/listentoapril/image/upload/april/f_jpg,q_auto,dpr_2,w_360,e_grayscale/${image})`
+        
+          const metaData = [
+            { name: 'og:title', content: 'Time Until PSL' },
+            { name: 'og:description', content: `${days}` days, ${hours} hours, ${seconds} seconds.` },
+            { name: 'og:image', content: imageSrc },
+          ];
+    
+          // Create meta tags and append them to the head element
+          const head = document.head;
+          metaData.forEach(meta => {
+            const metaTag = document.createElement('meta');
+            metaTag.setAttribute('name', meta.name);
+            metaTag.setAttribute('content', meta.content);
+            head.appendChild(metaTag);
+          });
+        }
+    
+        // Call the function to add meta tags for share embeds
+        addShareEmbedMetaTags();
     </script>
 </body>
 </html>
