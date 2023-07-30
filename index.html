@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PSL Countdown</title>
+   <title>PSL Countdown</title>
    <link
       rel="icon"
-      href="https://psl.coffee/coffee5.ico"
+      href="https://psl.coffee/public/coffee5.ico"
       type="image/x-icon"
     />
+
+    <meta property="og:title" content="Time until PSL" />
+<meta property="og:url" content="https://psl.coffee" />
+<meta property="og:image" content="https://res.cloudinary.com/listentoapril/image/upload/f_jpg,q_auto,dpr_2,w_360/psl/6aaa4eefb04846848668c64bd3641f88557e6c92.webp" />
+
+   
 </head>
 <body>
     <div id="countdown">
-        <h1>Time Until PSL</h1>
+        <h1>Time until PSL</h1>
         <div id="timer">
             <span id="days">00</span> days
             <span id="hours">00</span> hours
@@ -62,6 +68,8 @@
             return time < 10 ? "0" + time : time;
         }
 
+  
+
         // Function to add meta tags for share embeds
         function addShareEmbedMetaTags() {
           const { days, hours, minutes, seconds } = getTimeRemaining();
@@ -81,7 +89,7 @@
           ]
 
           const image = images[Math.floor(Math.random() * images.length)];
-          const imageSrc = `https://res.cloudinary.com/listentoapril/image/upload/april/f_jpg,q_auto,dpr_2,w_360,e_grayscale/${image})`
+          const imageSrc = `https://res.cloudinary.com/listentoapril/image/upload/f_jpg,q_auto,dpr_2,w_360/psl/${image})`
         
           const metaData = [
             { name: 'og:title', content: 'Time Until PSL' },
@@ -91,6 +99,7 @@
     
           // Create meta tags and append them to the head element
           const head = document.head;
+          head.querySelector('title').innerText = `${days} days, ${hours} hours, ${seconds} seconds.`;
           metaData.forEach(meta => {
             const metaTag = document.createElement('meta');
             metaTag.setAttribute('name', meta.name);
