@@ -8,23 +8,6 @@
       type="image/x-icon"
     />
 
-    <meta property="og:title" content="Time until PSL" />
-<meta property="og:url" content="https://psl.coffee" />
-<meta property="og:image" content="https://res.cloudinary.com/listentoapril/image/upload/f_jpg,q_auto,dpr_2,w_360/psl/6aaa4eefb04846848668c64bd3641f88557e6c92.webp" />
-
-   
-</head>
-<body>
-    <div id="countdown">
-        <h1>Time until PSL</h1>
-        <div id="timer">
-            <span id="days">00</span> days
-            <span id="hours">00</span> hours
-            <span id="minutes">00</span> minutes
-            <span id="seconds">00</span> seconds
-        </div>
-    </div>
-
     <script>
         // Set the date and time for the countdown
         var targetDate = new Date("2023-08-30T00:00:00Z"); // Replace with your desired date and time in the format "YYYY-MM-DDTHH:mm:ssZ"
@@ -89,7 +72,6 @@
           const imageSrc = `https://res.cloudinary.com/listentoapril/image/upload/f_jpg,q_auto,dpr_2,w_360/psl/${image})`
         
           const metaData = [
-            { name: 'og:title', content: 'Time Until PSL' },
             { name: 'og:description', content: `${days} days, ${hours} hours, ${seconds} seconds.` },
             { name: 'og:image', content: imageSrc },
           ];
@@ -104,9 +86,27 @@
             head.appendChild(metaTag);
           });
         }
-    
-        updateCountdown()
+
         addShareEmbedMetaTags();
+    </script>
+
+    <meta property="og:title" content="Time until PSL" />
+    <meta property="og:url" content="https://psl.coffee" />
+    <meta property="og:image" content="https://res.cloudinary.com/listentoapril/image/upload/f_jpg,q_auto,dpr_2,w_360/psl/6aaa4eefb04846848668c64bd3641f88557e6c92.webp" /> 
+</head>
+<body>
+    <div id="countdown">
+        <h1>Time until PSL</h1>
+        <div id="timer">
+            <span id="days">00</span> days
+            <span id="hours">00</span> hours
+            <span id="minutes">00</span> minutes
+            <span id="seconds">00</span> seconds
+        </div>
+    </div>
+
+    <script>
+       updateCountdown();
     </script>
 </body>
 </html>
